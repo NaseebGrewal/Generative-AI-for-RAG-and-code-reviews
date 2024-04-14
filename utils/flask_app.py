@@ -1,7 +1,7 @@
 import os
 
 import fitz
-import textract
+# import textract
 from Azure_Cognitive_Search import (
     create_index,
     delete_index,
@@ -107,9 +107,9 @@ def extract_text(filepath):
                 if text:
                     chunks.append(text)
 
-        else:
-            text = textract.process(filepath).decode("utf-8")
-            chunks.append(text)
+        # else:
+        #     text = textract.process(filepath).decode("utf-8")
+        #     chunks.append(text)
 
     except FileNotFoundError:
         return f"File not found: {filepath}", ext

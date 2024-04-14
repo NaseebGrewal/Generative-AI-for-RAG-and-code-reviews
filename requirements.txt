@@ -28,7 +28,7 @@ python-pptx==0.6.23
 PyMuPDF
 pandas==2.2.1
 yake==0.4.8
-textract==1.6.5
+# textract==1.6.5
 # DB
 pyodbc
 SQLAlchemy==2.0.27
