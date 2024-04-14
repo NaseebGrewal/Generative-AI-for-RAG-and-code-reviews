@@ -5,4 +5,4 @@
 
 ## Step2: Install the dependencies from requirements.txt
 
-## Step3: Run Flask.oy file from utils directory
+## Step3: Run Flask.py file from utils directory
