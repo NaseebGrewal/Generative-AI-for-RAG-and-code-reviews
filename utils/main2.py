@@ -1,6 +1,7 @@
 import os
 
 import fitz
+
 # import textract
 from Azure_Cognitive_Search import (
     create_index,
