@@ -23,7 +23,7 @@ This repository contains code and resources for integrating generative AI techni
 
 - **utils/**  
   Contains additional utility scripts such as:
-  - `Flask.oy` (or similarly named Flask application file) – used to run the web interface or API.
+  - `Flask.py` (or similarly named Flask application file) – used to run the web interface or API.
 
 - **.env**  
   Environment file located in the root directory.  
@@ -34,7 +34,7 @@ This repository contains code and resources for integrating generative AI techni
 1. **Clone the Repository**
 
    ```bash
-   git clone https://github.com/yourusername/Generative-AI-for-RAG-and-code-reviews.git
+   git clone https://github.com/NaseebGrewal/Generative-AI-for-RAG-and-code-reviews.git
    cd Generative-AI-for-RAG-and-code-reviews
    ```
 
@@ -71,7 +71,7 @@ This repository contains code and resources for integrating generative AI techni
      
      ```bash
      cd utils
-     python Flask.oy
+     python flask.py
      ```
 
 ## Additional Notes
