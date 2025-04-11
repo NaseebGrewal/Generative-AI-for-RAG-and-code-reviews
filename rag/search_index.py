@@ -1,5 +1,5 @@
 import os
-from typing import List, Tuple, Dict, Any
+from typing import List, Dict, Any
 import sqlite3
 import numpy as np
 import faiss
@@ -13,7 +13,8 @@ load_dotenv(dotenv_path="../../.env")
 FILE_PATH = os.getenv("FILE_PATH2")
 MODEL_NAME = "BAAI/bge-small-en-v1.5"
 INDEX_PATH = "faiss_chunk_index.bin"
-DB_PATH= "chunks.db"
+DB_PATH = "chunks.db"
+
 
 def search_index(query: str, index: faiss.Index, top_k: int = 5) -> List[str]:
     """
@@ -29,12 +30,13 @@ def search_index(query: str, index: faiss.Index, top_k: int = 5) -> List[str]:
         List[str]: Most relevant text chunks.
     """
     model = SentenceTransformer(MODEL_NAME)
-    query_embedding = model.encode([query], normalize_embeddings=True).astype(np.float32)
+    query_embedding = model.encode([query], normalize_embeddings=True).astype(
+        np.float32
+    )
     distances, indices = index.search(query_embedding, top_k)
 
     # return [chunks[idx] for idx in indices[0]]
     return indices, distances
-
 
 
 def retrieve_document(doc_idx: int) -> Dict[str, Any]:

@@ -1,5 +1,4 @@
-
-from typing import List, Tuple
+from typing import List
 
 
 import numpy as np
@@ -7,12 +6,13 @@ from sentence_transformers import SentenceTransformer
 from langchain.text_splitter import RecursiveCharacterTextSplitter
 
 
-
 # Constants
 MODEL_NAME = "BAAI/bge-small-en-v1.5"
 
 
-def load_and_split_documents(file_path: str, chunk_size: int = 500, chunk_overlap: int = 50) -> List[str]:
+def load_and_split_documents(
+    file_path: str, chunk_size: int = 500, chunk_overlap: int = 50
+) -> List[str]:
     """
     Load text file and split it into smaller chunks for indexing.
 
