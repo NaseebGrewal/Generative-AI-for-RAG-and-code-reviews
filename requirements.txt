@@ -1,0 +1,34 @@
+#Azure
+# azure-functions
+# azure-core==1.29.3
+# azure-common==1.1.28
+# azure-storage-blob==12.18.1
+# azure-identity==1.14.0
+# msrest==0.7.1
+tqdm==4.66.1
+
+# AI
+openai==1.11.1
+langchain==0.1.11
+langchain-openai==0.0.5
+langchain-community==0.0.25
+langsmith==0.1.23
+# azure-search-documents==11.4.0
+# azure-cognitiveservices-speech==1.34.0
+
+# document processing
+extract-msg==0.48.2
+openpyxl==3.1.2
+# Pillow==10.0.1
+pdf2image==1.16.3
+PyMuPDF==1.23.5
+PyMuPDFb==1.23.5
+python-docx==1.1.0
+python-pptx==0.6.23
+PyMuPDF
+pandas==2.2.1
+yake==0.4.8
+# textract==1.6.5
+# DB
+pyodbc
+SQLAlchemy==2.0.27

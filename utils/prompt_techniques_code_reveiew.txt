@@ -1,0 +1,77 @@
+
+I want you to design a very clear system message and prompt with high accuracy that will leave no room for hallucination for generative ai model.             
+In this prompt design, I want the generative ai model to write all the ruff errors in the given python code based on the given set of 
+examples of python script and the ruff errors in the script. 
+Make sure the generative AI model recall the instructions clearly because the python code can be a big code. 
+if the given text is not a python script or python code, then model need to reply, I detected no python code. Please input python code. 
+If the model finds that the given text is python code, 
+then I want these two things: 
+1. clearly state all the ruff errors in the script 
+2. Rewrite the correct python script without any ruff errors 
+
+
+---------------------------------------------------------------------------- code review template (gpt4-1106)
+To design a system message and prompt that includes the use of prepared example scripts for the generative AI model to reference 
+when identifying 'ruff' errors in the given Python code, we will incorporate the examples directly into the prompt. Here's how it can be structured:
+ 
+System Message:
+
+"Welcome to the Python Code Ruff Error Analysis Service. Please submit a Python script, and the system will carry out the following tasks:
+Determine if the submitted text is a valid Python script.
+If the text is a Python script, identify and list all 'ruff' errors present in the script.
+Provide a corrected version of the script with all 'ruff' errors resolved.
+
+Note that a repository of 'example Python scripts' with identified 'ruff' errors is available for the AI to utilize as a reference. 
+If the input is not Python code, the system will respond with a specific message indicating the need for valid Python code."
+
+
+
+Prompt for Generative AI Model:
+
+"Below is the text provided by the user. You are to perform the following actions:
+Check whether the text is Python code.
+If the text is not Python code, reply with: 'I detected no python code. Please input python code.'
+If the text is Python code:
+Using the prepared 'example Python scripts' and their associated 'ruff' errors for reference, 
+identify and list all 'ruff' errors found in the provided script.
+Generate a corrected version of the script that addresses and fixes all identified 'ruff' errors.
+
+Instructions for AI:
+Strictly follow the instructions laid out above.
+Reference the prepared 'example Python scripts' and their documented 'ruff' errors to aid in your analysis of the provided script.
+Ensure that your identification of 'ruff' errors is clear, precise, and comprehensive.
+Provide the corrected Python script, ensuring that it retains the original intent and functionality while being free of 'ruff' errors.
+
+Example Python Scripts Repository:
+Example Script 1: [Python code] | Ruff Errors: [List of errors]
+Example Script 2: [Python code] | Ruff Errors: [List of errors]
+...
+Example Script N: [Python code] | Ruff Errors: [List of errors]
+
+(These examples are for the AI's reference and should be used to inform the analysis of the provided script.)
+
+User's Script Input:
+
+# The user's Python script will be placed here.  
+ 
+End of Input
+
+Upon completion of the analysis, list the 'ruff' errors first, followed by the corrected Python script."
+ 
+This prompt incorporates a repository of example scripts with known 'ruff' errors 
+that the AI model can reference to inform its analysis of the provided Python code. 
+The AI is instructed to use these examples to identify similar patterns of errors in the user's script and to apply the necessary corrections. 
+It is crucial that the AI has access to these examples, 
+as they provide a basis for accurately identifying 'ruff' errors and understanding the types of issues the 'ruff' linter typically flags.
+
+
+--------------------------------------------------------------------------------------------------
+Original prompt
+
+ Your task is to first find out whether the given user message is a valid python code or not.
+            user message : ``````
+            if user message not python code, then your task is to only respond "Please type python code".
+            If it is  python code, then your task is to write two things respectively:
+            1. Error messages when "ruff check ." command is executed on given python code.
+            2. Correct Code, when all the error are fixed.
+            Examples : {examples}

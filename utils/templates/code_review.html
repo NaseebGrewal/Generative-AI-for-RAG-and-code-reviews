@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>My Code Reviewer</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f4f7f6;
+            color: #444;
+        }
+        .title {
+            text-align: center;
+            margin: 40px 0;
+            font-size: 2.5rem;
+            color: #5D647B;
+        }
+        .chat-box {
+            width: 80%;
+            margin: 20px auto;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            overflow: hidden;
+            background: white;
+            height: calc(100vh - 160px); /* Adjusted for aesthetic spacing */
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+        .chat-history {
+            overflow-y: auto;
+            padding: 20px;
+            flex-grow: 1;
+            background: #fff;
+        }
+                /* ... existing styles ... */
+
+                /* ... existing styles ... */
+
+        .query-form {
+            padding: 10px;
+            background: #eee;
+            display: block; /* Change to block to allow 100% width */
+        }
+        .query-form form {  
+            display: flex;  
+            justify-content: space-between; /* Align form elements */  
+            flex-direction: column;
+        }  
+  
+        .query-form textarea {
+            width: 99%; /* Full width of the form */
+            margin-bottom: 10px; /* Space between textarea and button */
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            padding: 10px;
+            resize: none; /* Optional: Disable textarea resize handle */
+            font-family: inherit;
+            font-size: 1rem;
+        }
+        .query-form button {
+            width: auto; /* Auto width for button */
+            padding: 10px 20px;
+            background-color: #5D647B;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            align-self: flex-end; /* Position button to the right */
+            margin-top: 10px; /* Space between textarea and button */
+            margin: 5 5px; /* Add spacing between buttons */
+        }
+        .query-form button:hover {
+            background-color: #4b5267;
+        }
+        .message pre {
+            /* existing styles... */
+            white-space: pre-wrap; /* Preserves whitespace and wraps text */
+            word-wrap: break-word; /* Allows long words to be broken and wrapped to the next line */
+        }
+
+        .message {  
+            /* existing styles... */  
+            max-width: 100%; /* Ensure the message container doesn't exceed the width of its parent */  
+            margin-bottom: 15px;  
+            padding: 15px;  
+            border-radius: 8px;  
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);  
+            background-color: #f9f9f9;  
+            position: relative;  
+        } 
+        .user-message {
+            background-color: #D0E6A5;
+            text-align: left;
+            margin-right: 20%;
+        }
+        .bot-message {
+            background-color: #86BBBD;
+            text-align: left;
+            margin-left: 20%;
+        }
+        .user-message::before,
+        .bot-message::before {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            width: 0;
+            height: 0;
+            border-style: solid;
+        }
+        .user-message::before {
+            left: -10px;
+            border-width: 15px 10px 0 0;
+            border-color: #D0E6A5 transparent transparent transparent;
+        }
+        .bot-message::before {
+            right: -10px;
+            border-width: 15px 0 0 10px;
+            border-color: #86BBBD transparent transparent transparent;
+        }
+    </style>
+    <style>
+        /* ... existing styles ... */
+        /* Add subtle animation to the chat history for a nice effect when loading */
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        .chat-history {
+            animation: fadeIn 1s ease-in-out;
+        }
+    </style>
+</head>
+<body>
+    <h1 class="title">My Code Reviewer</h1>
+    <div class="chat-box">
+        <div class="chat-history">
+            <!-- Chat history -->
+            {% for entry in chat_history %}
+                <div class="message user-message">
+                    <strong>You:<br></strong><pre>{{ entry.user | safe }}</pre>
+                </div>
+                <div class="message bot-message">
+                    <strong>Bot:<br></strong><pre>{{ entry.bot | safe }}</pre>
+                </div>
+            {% endfor %}
+        </div>
+        <!-- Add form for new query here -->
+        <div class="query-form">
+            <form method="POST" enctype="multipart/form-data" id="codeReviewForm">
+                <textarea name="query" placeholder="Type your code here..." rows="4"></textarea>
+                
+                <!-- Input for file upload -->
+                <input type="file" name="file" id="file" accept=".py" onchange="submitForm()">
+
+                <!-- Message indicating accepted file formats -->  
+            	<p>Accepted file formats: ".py"</p>
+                
+                <!-- Review Code button -->
+                <button type="submit" id="reviewBtn">Review Code</button>
+                <button type="submit" formaction="{{ url_for('reset_code_review') }}">Reset</button>
+            </form>
+            <script>
+                function submitForm() {
+                    const fileInput = document.getElementById('file');
+                    const form = document.getElementById('codeReviewForm');
+                    const reviewBtn = document.getElementById('reviewBtn');
+                    
+                    // Check if a file has been selected
+                    if (fileInput.files.length > 0) {
+                        // Submit the form
+                        reviewBtn.disabled = true;
+                        form.submit();
+                    } else {
+                                    // If no file is selected, enable the Review Code button
+                        reviewBtn.disabled = false;
+                    }
+                }
+                    // Function to scroll the chat history to the bottom
+                function scrollToBottom() {
+                    var chatHistory = document.querySelector('.chat-history');
+                    chatHistory.scrollTop = chatHistory.scrollHeight;
+                }
+                // Call the function when the page loads
+                window.onload = scrollToBottom;
+            </script>
+        </div>
+    </div>
+</body>
+</html>

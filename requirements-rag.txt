@@ -1,0 +1,8 @@
+# imported libraries
+# NOTE faiss-cpu is used for MAC & Linux OS
+sentence_transformers
+faiss-cpu
+numpy
+python-dotenv
+openai
+langchain
