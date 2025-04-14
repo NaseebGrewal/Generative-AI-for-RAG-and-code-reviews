@@ -1,4 +1,7 @@
-
+"""
+This file contains the function to call open ai
+file: call_openai.py
+"""
 
 import os
 from dotenv import load_dotenv
