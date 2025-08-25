@@ -1,9 +1,10 @@
 import os
-from typing import List, Tuple
 import sqlite3
+from typing import List, Tuple
+
 import faiss
 from dotenv import load_dotenv
-from load_preprocess_data import load_and_split_documents, embed_text_chunks
+from load_preprocess_data import embed_text_chunks, load_and_split_documents
 
 current_dir = os.path.dirname(__file__)
 env_path = os.path.join(current_dir, "..", ".env")
@@ -71,9 +72,7 @@ def create_chunk_based_faiss_index(
         index.hnsw.efConstruction = 40
         index.add(embeddings)
         faiss.write_index(index, INDEX_PATH)
-        print(
-            f"FAISS index created with {len(chunks)} documents and saved to {INDEX_PATH}."
-        )
+        print(f"FAISS index created with {len(chunks)} documents and saved to {INDEX_PATH}.")
 
         store_metadata(chunks)
         print("Metadata stored in SQLite database.")

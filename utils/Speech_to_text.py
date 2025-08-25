@@ -9,17 +9,13 @@ load_dotenv()
 
 def transcribe_wav_file(file_path, subscription_key, service_region):
     # Initialize the speech configuration with the subscription key and service region
-    speech_config = speechsdk.SpeechConfig(
-        subscription=subscription_key, region=service_region
-    )
+    speech_config = speechsdk.SpeechConfig(subscription=subscription_key, region=service_region)
 
     # Set the input audio file to be transcribed
     audio_input = speechsdk.AudioConfig(filename=file_path)
 
     # Initialize the speech recognizer
-    speech_recognizer = speechsdk.SpeechRecognizer(
-        speech_config=speech_config, audio_config=audio_input
-    )
+    speech_recognizer = speechsdk.SpeechRecognizer(speech_config=speech_config, audio_config=audio_input)
 
     # Create a threading Event object to control the stopping condition
     transcription_completed_event = threading.Event()
@@ -67,7 +63,5 @@ def get_text(wav_file_path):
     azure_subscription_key = os.environ["speech_key"]
     azure_service_region = os.environ["speech_region"]
 
-    text = transcribe_wav_file(
-        wav_file_path, azure_subscription_key, azure_service_region
-    )
+    text = transcribe_wav_file(wav_file_path, azure_subscription_key, azure_service_region)
     return text

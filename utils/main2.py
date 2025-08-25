@@ -46,17 +46,11 @@ delete_index("test-index")
 
 
 def allowed_file(filename):
-    return (
-        "." in filename
-        and filename.rsplit(".", 1)[1].lower() in app.config["ALLOWED_EXTENSIONS"]
-    )
+    return "." in filename and filename.rsplit(".", 1)[1].lower() in app.config["ALLOWED_EXTENSIONS"]
 
 
 def allowed_file2(filename):
-    return (
-        "." in filename
-        and filename.rsplit(".", 1)[1].lower() in app.config["ALLOWED_EXTENSIONS2"]
-    )
+    return "." in filename and filename.rsplit(".", 1)[1].lower() in app.config["ALLOWED_EXTENSIONS2"]
 
 
 def extract_text(filepath):
@@ -138,9 +132,7 @@ def chatbot():
         # ai_response = ai_response.replace("\n", "<br>")
         # user_query = user_query.replace("\n", "<br>")
         chat_history.append({"user": user_query, "bot": ai_response})
-        return redirect(
-            url_for("chatbot")
-        )  # This will redirect to a GET request after POST
+        return redirect(url_for("chatbot"))  # This will redirect to a GET request after POST
 
     # messages = session.get('messages', [])
     return render_template("chatbot.html", chat_history=chat_history)
@@ -193,9 +185,7 @@ def code_review():
         # user_query = user_query.replace("\n", "<br>")
         chat_history2.append({"user": user_query, "bot": ai_response})
         session.modified = True
-        return redirect(
-            url_for("code_review")
-        )  # This will redirect to a GET request after POST
+        return redirect(url_for("code_review"))  # This will redirect to a GET request after POST
 
     # messages = session.get('messages', [])
 

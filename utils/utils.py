@@ -4,7 +4,6 @@ import pptx
 import PyPDF2
 import speech_recognition as sr
 
-
 # Set your OpenAI API Key
 openai.api_key = "your_openai_api_key"
 

@@ -1,7 +1,9 @@
-from rag.create_index import create_chunk_based_faiss_index
-from rag.search_index import search_index, retrieve_document
-from dotenv import load_dotenv
 import os
+
+from dotenv import load_dotenv
+
+from rag.create_index import create_chunk_based_faiss_index
+from rag.search_index import retrieve_document, search_index
 
 current_dir = os.path.dirname(__file__)
 env_path = os.path.join(current_dir, "..", ".env")
@@ -19,9 +21,7 @@ queries2 = [
 
 
 # Create FAISS index and load chunks
-index, chunks = create_chunk_based_faiss_index(
-    file_path=FILE_PATH, force_recreate=False
-)
+index, chunks = create_chunk_based_faiss_index(file_path=FILE_PATH, force_recreate=False)
 print(f"Indexing complete. Number of indexed chunks: {len(chunks)}")
 
 

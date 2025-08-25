@@ -1,8 +1,9 @@
 import os
-from typing import List, Dict, Any
 import sqlite3
-import numpy as np
+from typing import Any, Dict, List
+
 import faiss
+import numpy as np
 from dotenv import load_dotenv
 from sentence_transformers import SentenceTransformer
 
@@ -30,9 +31,7 @@ def search_index(query: str, index: faiss.Index, top_k: int = 5) -> List[str]:
         List[str]: Most relevant text chunks.
     """
     model = SentenceTransformer(MODEL_NAME)
-    query_embedding = model.encode([query], normalize_embeddings=True).astype(
-        np.float32
-    )
+    query_embedding = model.encode([query], normalize_embeddings=True).astype(np.float32)
     distances, indices = index.search(query_embedding, top_k)
 
     # return [chunks[idx] for idx in indices[0]]
